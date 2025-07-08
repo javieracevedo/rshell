@@ -1,4 +1,16 @@
 module ShellConfig
+    extend self
+
+    def my_attr(*names)
+        names.each do |name|
+            define_method(name) do
+                instance_variable_get("@#{name}")
+            end
+        end
+    end
+
+    my_attr :path, :prompt_color, :qotd_list
+
     RGB_COLOR_MAP = {
         cyan: "139;233;253",
         green: "80;250;123",
@@ -11,18 +23,6 @@ module ShellConfig
 
     MODE = "interactive" if ARGV.length == 0 
     MODE = "batch" if ARGV.length == 1
-
-    def self.path
-        @path
-    end
-
-    def self.prompt_color
-        @prompt_color
-    end
-
-    def self.qotd_list
-        @qotd_list
-    end
 
     def self.apply_config_file()
         File.open("rshell.cfg", "r") do |f|
