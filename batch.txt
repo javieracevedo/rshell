@@ -1,0 +1,9 @@
+echo hello world
+mkdir test
+cd test
+pwd
+touch test.txt
+cd ..
+pwd
+rm -rf test
+
