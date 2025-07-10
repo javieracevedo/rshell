@@ -17,7 +17,7 @@ module ShellConfig
         red: "255;85;85"
     }.freeze
 
-    @path = []
+    @path = ""
     @prompt_color = "white"
     @qotd_list = []
 
@@ -35,9 +35,7 @@ module ShellConfig
                     if lhs == "prompt_color"
                         @prompt_color = rhs
                     elsif lhs == "path"
-                        line.split("=")[1].split(":").each { |entry|
-                            @path << rhs
-                        }
+                        @path = rhs
                     elsif lhs == "qotd_list"
                         rhs.split(",").each { |entry|
                             @qotd_list << entry

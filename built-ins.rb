@@ -1,4 +1,6 @@
 module BuiltIn
+    require_relative "config"
+
     def self.cd(args)
         if args.length > 1
             begin
@@ -12,11 +14,14 @@ module BuiltIn
     end
 
     def self.path(args)
-        if args.length > 1
+        if args.length > 2
             args.slice(1, args.length).each { |arg|
-                $path << arg
+                ShellConfig.path + ":" + arg + ":"
             }
         end
-        puts $path.join(":")
+
+        STDIN.cooked do
+            puts ShellConfig.path
+        end
     end
 end
