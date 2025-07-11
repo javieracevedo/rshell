@@ -17,7 +17,7 @@ module RShell
     end
 
     def self.display_qotd()
-        puts "\e[38;2;#{ShellConfig::RGB_COLOR_MAP[:cyan]}mQuote of the Day: \n\n"
+        puts "\e[38;2;#{ShellConfig::RGB_COLOR_MAP[ShellConfig::qotd_color.to_sym]}mQuote of the Day: \n\n"
         puts "\"#{ShellConfig.qotd_list.sample(1)[0]}\"\e[0m"
         puts ""
     end
@@ -52,8 +52,7 @@ module RShell
 
     def self.start_interactive()
         input_buffer = ""
-        prompt = "\e[38;2;#{ShellConfig::RGB_COLOR_MAP[:red]}m@rshel #{Dir.getwd()} >> \e[0m"
-
+        prompt = "\e[38;2;#{ShellConfig::RGB_COLOR_MAP[ShellConfig::prompt_color.to_sym || :white]}m@rshel #{Dir.getwd()} >> \e[0m"
         STDIN.raw do
             print prompt
 
